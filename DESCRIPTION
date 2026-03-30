@@ -1,0 +1,24 @@
+Package: ggrefine
+Title: Pretty 'ggplot2' Themes
+Version: 0.1.0
+Authors@R: 
+    person("David", "Hodge", , "davidhodge931@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-3868-7501"))
+Description: A set of complete 'ggplot2' themes and functions to refine these.
+License: MIT + file LICENSE
+URL: https://github.com/davidhodge931/ggrefine,
+        https://davidhodge931.github.io/ggrefine/
+BugReports: https://github.com/davidhodge931/ggrefine/issues
+Depends: R (>= 4.1.0)
+Imports: blends, flexoki, ggplot2, grid, jumble, rlang, scales, viridis
+Suggests: patchwork
+Encoding: UTF-8
+Language: en-GB
+RoxygenNote: 7.3.3
+NeedsCompilation: no
+Packaged: 2026-03-25 22:35:45 UTC; david
+Author: David Hodge [aut, cre, cph] (ORCID:
+    <https://orcid.org/0000-0002-3868-7501>)
+Maintainer: David Hodge <davidhodge931@gmail.com>
+Repository: CRAN
+Date/Publication: 2026-03-30 18:00:02 UTC
