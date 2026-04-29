@@ -1,6 +1,6 @@
-#' Lighter theme
+#' Light theme
 #'
-#' @description A complete theme for a white panel background.
+#' @description A complete theme for a white plot and panel background.
 #'
 #' @param ... Require named arguments (and support trailing commas).
 #' @param text_size The base size of the text theme element. Defaults to 10.
@@ -13,7 +13,7 @@
 #' @param legend_key_fill The fill (and colour) of the legend.key theme element.
 #' @param legend_ticks_colour The colour of the legend.ticks theme element.
 #' @param legend_ticks_linewidth The linewidth of the legend.ticks theme element.
-#' @param legend_ticks_length The legend.ticks.length theme element.
+#' @param legend_ticks_length The length of the legend.ticks.length theme element.
 #' @param axis_line_colour The colour of the axis.line theme element.
 #' @param axis_line_linewidth The linewidth of the axis.line theme element.
 #' @param axis_ticks_colour The colour of the axis.ticks theme element.
@@ -64,11 +64,13 @@
 #' p_light  <- p_base_light + ggrefine::theme_light() + labs(title = "ggrefine::theme_light")
 #' p_dark  <- p_base_dark  + ggrefine::theme_dark() + labs(title = "ggrefine::theme_dark")
 #' p_grey <- p_base_light + ggrefine::theme_grey() + labs(title = "ggrefine::theme_grey")
+#' p_oat <- p_base_light + ggrefine::theme_oat() + labs(title = "ggrefine::theme_oat")
 #'
 #' patchwork::wrap_plots(
 #'   p_light,
 #'   p_dark,
-#'   p_grey
+#'   p_grey,
+#'   p_oat
 #' )
 #'
 theme_light <- function(
@@ -171,6 +173,11 @@ theme_light <- function(
         angle = 0,
         margin = ggplot2::margin(),
       ),
+      line = ggplot2::element_line(
+        colour = axis_line_colour,
+        linewidth = axis_line_linewidth,
+        lineend = "square"
+      ),
       axis.line = ggplot2::element_line(
         colour = axis_line_colour,
         linewidth = axis_line_linewidth,
@@ -213,15 +220,76 @@ theme_light <- function(
       axis.ticks.length.y.right = NULL,
       axis.minor.ticks.length = ggplot2::rel(0.66),
       axis.title = ggplot2::element_text(),
+      axis.title.x = ggplot2::element_text(
+        margin = ggplot2::margin(t = 5.5),
+      ),
+      axis.title.x.top = ggplot2::element_text(
+        margin = ggplot2::margin(b = 5.5),
+      ),
+      axis.title.y = ggplot2::element_text(
+        margin = ggplot2::margin(r = 11),
+        angle = 90,
+      ),
+      axis.title.y.right = ggplot2::element_text(
+        margin = ggplot2::margin(l = 11),
+        angle = -90,
+      ),
       axis.text = ggplot2::element_text(),
+      axis.text.x = ggplot2::element_text(
+        vjust = 1,
+        margin = ggplot2::margin(t = 3.33)
+      ),
+      axis.text.x.top = ggplot2::element_text(
+        vjust = 0,
+        margin = ggplot2::margin(b = 3.33)
+      ),
       axis.text.y = ggplot2::element_text(
-        margin = ggplot2::margin(r = 2.75),
+        margin = ggplot2::margin(r = 3.33),
         hjust = 1
       ),
       axis.text.y.right = ggplot2::element_text(
-        margin = ggplot2::margin(l = 2.75),
+        margin = ggplot2::margin(l = 3.33),
         hjust = 0
       ),
+
+      legend.key = ggplot2::element_rect(
+        colour = legend_key_fill,
+        fill = legend_key_fill
+      ),
+      legend.key.height = ggplot2::rel(1),
+      legend.key.width = ggplot2::rel(0.6),
+
+      legend.key.spacing = NULL,
+      legend.key.spacing.x = grid::unit(11, "pt"),
+      legend.key.spacing.y = grid::unit(3.33, "pt"),
+      legend.frame = NULL,
+      legend.margin = ggplot2::margin(l = 5.5),
+      legend.spacing = ggplot2::unit(5.5, "pt"),
+      legend.spacing.y = ggplot2::unit(0, "pt"),
+      legend.text = ggplot2::element_text(
+        margin = ggplot2::margin(l = 5.5)
+      ),
+      legend.axis.line = ggplot2::element_line(
+        colour = legend_axis_line_colour,
+        linewidth = legend_axis_line_linewidth
+      ),
+      legend.ticks = ggplot2::element_line(
+        colour = legend_ticks_colour,
+        linewidth = legend_ticks_linewidth
+      ),
+      legend.ticks.length = legend_ticks_length,
+      legend.box.background = NULL,
+      legend.box.spacing = NULL,
+      legend.background = ggplot2::element_rect(
+        colour = legend_background_fill,
+        fill = legend_background_fill
+      ),
+
+      legend.box = "vertical",
+      legend.justification.right = "top",
+      legend.justification.top = "left",
+      legend.justification.bottom = "left",
+      legend.title.position = "top",
       panel.background = ggplot2::element_rect(
         colour = panel_background_fill,
         fill = panel_background_fill
@@ -252,25 +320,25 @@ theme_light <- function(
       strip.background = ggplot2::element_rect(fill = NA, colour = NA),
       strip.clip = "off",
       strip.text = ggplot2::element_text(
-        margin = ggplot2::margin(t = 0, r = 0, b = 8, l = 0)
+        margin = ggplot2::margin(b = 5.5)
       ),
       strip.text.x = NULL,
       strip.text.x.bottom = ggplot2::element_text(
-        margin = ggplot2::margin(t = 8, r = 0, b = 0, l = 0)
+        margin = ggplot2::margin(t = 5.5)
       ),
       strip.text.y = ggplot2::element_text(
-        margin = ggplot2::margin(t = 0, r = 0, b = 0, l = 8),
+        margin = ggplot2::margin(l = 5.5),
         angle = -90
       ),
       strip.text.y.left = ggplot2::element_text(
-        margin = ggplot2::margin(t = 0, r = 8, b = 0, l = 0),
+        margin = ggplot2::margin(r = 5.5),
         angle = 90
       ),
       strip.placement = "outside",
       strip.placement.x = NULL,
       strip.placement.y = NULL,
-      strip.switch.pad.grid = grid::unit(0.15, "pt"),
-      strip.switch.pad.wrap = grid::unit(0.15, "pt"),
+      strip.switch.pad.grid = grid::unit(2.75, "pt"),
+      strip.switch.pad.wrap = grid::unit(2.75, "pt"),
       plot.background = ggplot2::element_rect(
         colour = plot_background_fill,
         fill = plot_background_fill
@@ -280,23 +348,23 @@ theme_light <- function(
         family = title_family,
         colour = title_colour,
         hjust = 0,
-        margin = ggplot2::margin(b = 27.50)
+        margin = ggplot2::margin(b = 5.5)
       ),
-      plot.title.position = "plot",
       plot.subtitle = ggplot2::element_text(
         size = subtitle_size,
         family = subtitle_family,
         colour = subtitle_colour,
         hjust = 0,
-        margin = ggplot2::margin(b = 22)
+        margin = ggplot2::margin(b = 5.5)
       ),
       plot.caption = ggplot2::element_text(
-        size = caption_size,
-        family = caption_family,
-        colour = caption_colour,
-        hjust = caption_hjust,
-        margin = ggplot2::margin(t = 7.5, r = 0, b = 0, l = 0)
+        size    = caption_size,
+        family  = caption_family,
+        colour  = caption_colour,
+        hjust   = caption_hjust,
+        margin  = ggplot2::margin(t = 5.5)
       ),
+      plot.title.position = "plot",
       plot.caption.position = "plot",
       plot.tag = ggplot2::element_text(
         size = ggplot2::rel(1.2),
@@ -304,7 +372,7 @@ theme_light <- function(
         vjust = 0.5
       ),
       plot.tag.position = "topleft",
-      plot.margin = ggplot2::margin(7.5, 17.5, 7.5, 7.5),
+      plot.margin = ggplot2::margin(8.25, 12.375, 8.25, 8.25),
       complete = TRUE
     ) +
     ggplot2::theme(
@@ -322,6 +390,8 @@ theme_light <- function(
       geom.pointrange = ggplot2::element_geom(borderwidth = 0.33),
       geom.dotplot = ggplot2::element_geom(borderwidth = 0.33),
       geom.text = ggplot2::element_geom(colour = text_colour),
+      geom.label = ggplot2::element_geom(colour = text_colour, fill = panel_background_fill),
+      geom.curve = ggplot2::element_geom(colour = text_colour),
       palette.colour.discrete = palette_colour_discrete,
       palette.fill.discrete = palette_fill_discrete,
       palette.colour.continuous = palette_colour_continuous,
@@ -330,179 +400,30 @@ theme_light <- function(
       palette.linetype.discrete = scales::pal_manual(1:6)
     )
 
-  # Apply legend position specific settings
-  theme +
-    legend_place(
-      legend_place = legend_place,
-      legend_key_fill = legend_key_fill,
-      legend_background_fill = legend_background_fill,
-      legend_axis_line_colour = legend_axis_line_colour,
-      legend_axis_line_linewidth = legend_axis_line_linewidth,
-      legend_ticks_colour = legend_ticks_colour,
-      legend_ticks_linewidth = legend_ticks_linewidth,
-      legend_ticks_length = legend_ticks_length
-    )
+  if (legend_place == "right") {
+    theme +
+      ggplot2::theme(
+        legend.position = "right",
+        legend.location = "panel",
+        legend.box.just = "left",
+      )
+  }
+  else if (legend_place == "top") {
+    theme +
+      ggplot2::theme(
+        legend.position = "top",
+        legend.location = "plot",
+        legend.box.just = "top",
+      )
+  }
+  else if (legend_place == "bottom") {
+    theme +
+      ggplot2::theme(
+        legend.position = "bottom",
+        legend.location = "plot",
+        legend.box.just = "top",
+      )
+  }
 }
 
-#' Darker theme
-#'
-#' @description A complete theme for a dark panel background.
-#'
-#' @inheritParams theme_light
-#'
-#' @return A ggplot theme.
-#' @export
-#' @inherit theme_light examples
-#'
-theme_dark <- function(
-  ...,
-  text_size = 10,
-  text_family = "",
-  text_colour = flexoki::flexoki$base["base200"],
-  legend_place = "right",
-  legend_axis_line_colour = plot_background_fill,
-  legend_axis_line_linewidth = axis_line_linewidth,
-  legend_background_fill = plot_background_fill,
-  legend_key_fill = plot_background_fill,
-  legend_ticks_colour = legend_axis_line_colour,
-  legend_ticks_linewidth = legend_axis_line_linewidth,
-  legend_ticks_length = grid::unit(c(2.75, 0), "pt"),
-  axis_line_colour = flexoki::flexoki$base["base600"],
-  axis_line_linewidth = 0.25,
-  axis_ticks_colour = axis_line_colour,
-  axis_ticks_linewidth = axis_line_linewidth,
-  axis_ticks_length = grid::unit(3.66, "pt"),
-  panel_background_fill = flexoki::flexoki$base["base950"],
-  panel_grid_colour = "black",
-  panel_grid_linetype = 1,
-  panel_grid_linewidth = 1,
-  panel_grid_minor_linetype = 1,
-  panel_grid_minor_linewidth = 0.5,
-  plot_background_fill = "black",
-  geom_fill = "#357BA2FF",
-  geom_colour = geom_fill,
-  palette_fill_discrete = jumble::jumble,
-  palette_colour_discrete = palette_fill_discrete,
-  palette_fill_continuous = viridis::turbo(n = 256),
-  palette_colour_continuous = palette_fill_continuous,
-  panel_widths = NULL,
-  panel_heights = NULL
-) {
-  theme_light(
-    ...,
-    text_size = text_size,
-    text_family = text_family,
-    text_colour = as.character(text_colour),
-    legend_place = legend_place,
-    legend_axis_line_colour = as.character(legend_axis_line_colour),
-    legend_axis_line_linewidth = legend_axis_line_linewidth,
-    legend_background_fill = as.character(legend_background_fill),
-    legend_key_fill = as.character(legend_key_fill),
-    legend_ticks_colour = as.character(legend_ticks_colour),
-    legend_ticks_linewidth = legend_ticks_linewidth,
-    legend_ticks_length = legend_ticks_length,
-    axis_line_colour = as.character(axis_line_colour),
-    axis_line_linewidth = axis_line_linewidth,
-    axis_ticks_colour = as.character(axis_ticks_colour),
-    axis_ticks_linewidth = axis_ticks_linewidth,
-    axis_ticks_length = axis_ticks_length,
-    plot_background_fill = as.character(plot_background_fill),
-    panel_background_fill = as.character(panel_background_fill),
-    panel_grid_colour = as.character(panel_grid_colour),
-    panel_grid_linetype = panel_grid_linetype,
-    panel_grid_linewidth = panel_grid_linewidth,
-    panel_grid_minor_linetype = panel_grid_minor_linetype,
-    panel_grid_minor_linewidth = panel_grid_minor_linewidth,
-    geom_fill = as.character(geom_fill),
-    geom_colour = as.character(geom_colour),
-    palette_fill_discrete = palette_fill_discrete,
-    palette_colour_discrete = palette_colour_discrete,
-    palette_fill_continuous = palette_fill_continuous,
-    palette_colour_continuous = palette_colour_continuous,
-    panel_widths = panel_widths,
-    panel_heights = panel_heights
-  )
-}
 
-#' Greyer theme
-#'
-#' @description A complete theme with a grey panel background on a white plot
-#'   background. The panel grid colour is derived automatically by blending
-#'   `panel_background_fill` with itself using `blends::multiply()`,
-#'   producing a subtly darker tone that stays harmonious with the panel colour.
-#'
-#' @inheritParams theme_light
-#'
-#' @return A ggplot theme.
-#' @export
-#' @inherit theme_light examples
-#'
-theme_grey <- function(
-  ...,
-  text_size = 10,
-  text_family = "",
-  text_colour = flexoki::flexoki$base["black"],
-  legend_place = "right",
-  legend_axis_line_colour = plot_background_fill,
-  legend_axis_line_linewidth = axis_line_linewidth,
-  legend_background_fill = plot_background_fill,
-  legend_key_fill = plot_background_fill,
-  legend_ticks_colour = legend_axis_line_colour,
-  legend_ticks_linewidth = legend_axis_line_linewidth,
-  legend_ticks_length = grid::unit(c(2.75, 0), "pt"),
-  axis_line_colour = flexoki::flexoki$base["base600"],
-  axis_line_linewidth = 0.25,
-  axis_ticks_colour = axis_line_colour,
-  axis_ticks_linewidth = axis_line_linewidth,
-  axis_ticks_length = grid::unit(3.66, "pt"),
-  panel_background_fill = "#EAEEEFFF",
-  panel_grid_colour = blends::multiply(panel_background_fill),
-  panel_grid_linetype = 1,
-  panel_grid_linewidth = 1,
-  panel_grid_minor_linetype = 1,
-  panel_grid_minor_linewidth = 0.5,
-  plot_background_fill = "white",
-  geom_fill = "#357BA2FF",
-  geom_colour = geom_fill,
-  palette_fill_discrete = jumble::jumble,
-  palette_colour_discrete = palette_fill_discrete,
-  palette_fill_continuous = viridis::turbo(n = 256),
-  palette_colour_continuous = palette_fill_continuous,
-  panel_widths = NULL,
-  panel_heights = NULL
-) {
-  theme_light(
-    ...,
-    text_size = text_size,
-    text_family = text_family,
-    text_colour = as.character(text_colour),
-    legend_place = legend_place,
-    legend_axis_line_colour = as.character(legend_axis_line_colour),
-    legend_axis_line_linewidth = legend_axis_line_linewidth,
-    legend_background_fill = as.character(legend_background_fill),
-    legend_key_fill = as.character(legend_key_fill),
-    legend_ticks_colour = as.character(legend_ticks_colour),
-    legend_ticks_linewidth = legend_ticks_linewidth,
-    legend_ticks_length = legend_ticks_length,
-    axis_line_colour = as.character(axis_line_colour),
-    axis_line_linewidth = axis_line_linewidth,
-    axis_ticks_colour = as.character(axis_ticks_colour),
-    axis_ticks_linewidth = axis_ticks_linewidth,
-    axis_ticks_length = axis_ticks_length,
-    plot_background_fill = as.character(plot_background_fill),
-    panel_background_fill = as.character(panel_background_fill),
-    panel_grid_colour = as.character(panel_grid_colour),
-    panel_grid_linetype = panel_grid_linetype,
-    panel_grid_linewidth = panel_grid_linewidth,
-    panel_grid_minor_linetype = panel_grid_minor_linetype,
-    panel_grid_minor_linewidth = panel_grid_minor_linewidth,
-    geom_fill = as.character(geom_fill),
-    geom_colour = as.character(geom_colour),
-    palette_fill_discrete = palette_fill_discrete,
-    palette_colour_discrete = palette_colour_discrete,
-    palette_fill_continuous = palette_fill_continuous,
-    palette_colour_continuous = palette_colour_continuous,
-    panel_widths = panel_widths,
-    panel_heights = panel_heights
-  )
-}

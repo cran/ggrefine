@@ -1,29 +1,28 @@
 Package: ggrefine
-Title: Pretty 'ggplot2' Themes
-Version: 0.2.0
+Title: Publication-Quality 'ggplot2' Themes
+Version: 0.3.0
 Authors@R: 
     person(given = "David", family = "Hodge", 
            email = "davidhodge931@gmail.com", 
            role = c("aut", "cre", "cph"), 
            comment = c(ORCID = "0000-0002-3868-7501"))
-Description: A set of complete 'ggplot2' themes and refine
-    functions for plot appearance. The themes are designed to work
-    seamlessly with the refine functions, which adjust gridlines and axis
-    elements to suit the particulars of a plot. 
+Description: Complete themes for publication-quality 'ggplot2' visualisation. 
+    Also provides functions to modify these based on the positional axis scales 
+    and focus of a particular plot. 
 License: MIT + file LICENSE
 URL: https://github.com/davidhodge931/ggrefine,
         https://davidhodge931.github.io/ggrefine/
 BugReports: https://github.com/davidhodge931/ggrefine/issues
 Depends: R (>= 4.1.0)
 Imports: blends, flexoki, ggplot2, grid, jumble, rlang, scales, viridis
-Suggests: patchwork
+Suggests: knitr, patchwork, rmarkdown, spelling
 Encoding: UTF-8
 Language: en-GB
 RoxygenNote: 7.3.3
 NeedsCompilation: no
-Packaged: 2026-04-14 09:05:02 UTC; david
+Packaged: 2026-04-29 07:35:00 UTC; david
 Author: David Hodge [aut, cre, cph] (ORCID:
     <https://orcid.org/0000-0002-3868-7501>)
 Maintainer: David Hodge <davidhodge931@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-04-14 09:20:02 UTC
+Date/Publication: 2026-04-29 07:50:02 UTC
