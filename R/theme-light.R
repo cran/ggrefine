@@ -26,12 +26,6 @@
 #' @param panel_grid_minor_linetype The linetype of the panel.grid.minor theme element.
 #' @param panel_grid_minor_linewidth The linewidth of the panel.grid.minor theme element.
 #' @param plot_background_fill The fill (and colour) of the plot.background theme element.
-#' @param geom_fill The default fill colour of geom elements.
-#' @param geom_colour The default border colour of geom elements. Defaults to `geom_fill`.
-#' @param palette_fill_discrete The default discrete fill palette. A function or vector of colours.
-#' @param palette_colour_discrete The default discrete colour palette. Defaults to `palette_fill_discrete`.
-#' @param palette_fill_continuous The default continuous fill palette. A vector of colours.
-#' @param palette_colour_continuous The default continuous colour palette. Defaults to `palette_fill_continuous`.
 #' @param panel_widths The panel.widths theme element. A `unit` or unit vector setting the width of
 #'   individual panels, or a single unit for the total panel area width. Overrides aspect ratio set
 #'   by the theme, coord, or facets. Defaults to `NULL`.
@@ -98,23 +92,16 @@ theme_light <- function(
   panel_grid_minor_linetype = 1,
   panel_grid_minor_linewidth = 0.5,
   plot_background_fill = "white",
-  geom_fill = "#357BA2FF",
-  geom_colour = geom_fill,
-  palette_fill_discrete = jumble::jumble,
-  palette_colour_discrete = palette_fill_discrete,
-  palette_fill_continuous = viridis::turbo(n = 256),
-  palette_colour_continuous = palette_fill_continuous,
   panel_widths = NULL,
   panel_heights = NULL
 ) {
+
   # Convert all colour arguments to plain character strings
   text_colour <- as.character(text_colour)
   axis_line_colour <- as.character(axis_line_colour)
   panel_background_fill <- as.character(panel_background_fill)
   panel_grid_colour <- as.character(panel_grid_colour)
   plot_background_fill <- as.character(plot_background_fill)
-  geom_fill <- as.character(geom_fill)
-  geom_colour <- as.character(geom_colour)
 
   # Set defaults for dependent parameters
   if (is.null(axis_ticks_colour)) {
@@ -155,7 +142,7 @@ theme_light <- function(
   subtitle_size <- text_size
   subtitle_family <- text_family
   subtitle_colour <- text_colour
-  caption_size <- ggplot2::rel(0.9)
+  caption_size <- text_size
   caption_family <- text_family
   caption_colour <- text_colour
   caption_hjust <- 0
@@ -263,7 +250,7 @@ theme_light <- function(
       legend.key.spacing.x = grid::unit(11, "pt"),
       legend.key.spacing.y = grid::unit(3.33, "pt"),
       legend.frame = NULL,
-      legend.margin = ggplot2::margin(l = 5.5),
+      # legend.margin = ggplot2::margin(l = 5.5),
       legend.spacing = ggplot2::unit(5.5, "pt"),
       legend.spacing.y = ggplot2::unit(0, "pt"),
       legend.text = ggplot2::element_text(
@@ -280,6 +267,7 @@ theme_light <- function(
       legend.ticks.length = legend_ticks_length,
       legend.box.background = NULL,
       legend.box.spacing = NULL,
+      legend.box.just  = "left",
       legend.background = ggplot2::element_rect(
         colour = legend_background_fill,
         fill = legend_background_fill
@@ -377,8 +365,8 @@ theme_light <- function(
     ) +
     ggplot2::theme(
       geom = ggplot2::element_geom(
-        fill = geom_fill,
-        colour = geom_colour,
+        fill = "#357BA2FF",
+        colour = "#357BA2FF",
         pointshape = 21,
         linewidth = 0.66,
         borderwidth = 0.33,
@@ -386,17 +374,55 @@ theme_light <- function(
         fontsize = text_size,
         family = text_family
       ),
-      geom.point = ggplot2::element_geom(borderwidth = 0.33),
-      geom.pointrange = ggplot2::element_geom(borderwidth = 0.33),
-      geom.dotplot = ggplot2::element_geom(borderwidth = 0.33),
+      # Border geoms — have both fill and colour
+      geom.area           = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.bar            = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.boxplot        = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.col            = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.crossbar       = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.density        = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.dotplot        = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.hex            = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.map            = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.point          = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.pointrange     = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.polygon        = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.rect           = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.ribbon         = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.smooth         = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.sf             = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.tile           = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+      geom.violin         = ggplot2::element_geom(linewidth = 0.33, borderwidth = 0.33),
+
+      # Line geoms — colour only
+      geom.abline         = ggplot2::element_geom(linewidth = 0.66),
+      geom.contour        = ggplot2::element_geom(linewidth = 0.66),
+      geom.density_2d     = ggplot2::element_geom(linewidth = 0.66),
+      geom.errorbar       = ggplot2::element_geom(linewidth = 0.66),
+      geom.hline          = ggplot2::element_geom(linewidth = 0.66),
+      geom.line           = ggplot2::element_geom(linewidth = 0.66),
+      geom.linerange      = ggplot2::element_geom(linewidth = 0.66),
+      geom.path           = ggplot2::element_geom(linewidth = 0.66),
+      geom.quantile       = ggplot2::element_geom(linewidth = 0.66),
+      geom.rug            = ggplot2::element_geom(linewidth = 0.66),
+      geom.segment        = ggplot2::element_geom(linewidth = 0.66),
+      geom.spoke          = ggplot2::element_geom(linewidth = 0.66),
+      geom.step           = ggplot2::element_geom(linewidth = 0.66),
+      geom.vline          = ggplot2::element_geom(linewidth = 0.66),
+
+      geom.curve = ggplot2::element_geom(colour = text_colour, linewidth = 0.66),
+
       geom.text = ggplot2::element_geom(colour = text_colour),
       geom.label = ggplot2::element_geom(colour = text_colour, fill = panel_background_fill),
-      geom.curve = ggplot2::element_geom(colour = text_colour),
-      palette.colour.discrete = palette_colour_discrete,
-      palette.fill.discrete = palette_fill_discrete,
-      palette.colour.continuous = palette_colour_continuous,
-      palette.fill.continuous = palette_fill_continuous,
+
+      palette.colour.discrete = jumble::jumble,
+      palette.fill.discrete = jumble::jumble,
+
+      palette.colour.continuous = viridis::turbo(n = 256),
+      palette.fill.continuous = viridis::turbo(n = 256),
+
       palette.shape.discrete = scales::pal_manual(c(21, 24, 22, 23, 25)),
+
       palette.linetype.discrete = scales::pal_manual(1:6)
     )
 
@@ -405,7 +431,7 @@ theme_light <- function(
       ggplot2::theme(
         legend.position = "right",
         legend.location = "panel",
-        legend.box.just = "left",
+        legend.margin = ggplot2::margin(l = 5.5, b = 11),
       )
   }
   else if (legend_place == "top") {
@@ -413,7 +439,7 @@ theme_light <- function(
       ggplot2::theme(
         legend.position = "top",
         legend.location = "plot",
-        legend.box.just = "top",
+        legend.margin = ggplot2::margin(r = 5.5, b = 11),
       )
   }
   else if (legend_place == "bottom") {
@@ -421,7 +447,7 @@ theme_light <- function(
       ggplot2::theme(
         legend.position = "bottom",
         legend.location = "plot",
-        legend.box.just = "top",
+        legend.margin = ggplot2::margin(r = 5.5, b = 11),
       )
   }
 }
